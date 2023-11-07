@@ -31,7 +31,20 @@ public class CordinatStringReaderTest {
         assert rover.equals(expectedRover);
     }
 
-    
+    @Test
+    public void testMission() {
+        CordinatFileReader cordinateFileReader = new CordinatFileReader();
+        Mission mission = new Mission();
+        cordinateFileReader.readMission(FILE_PATH, mission);
+
+        Mission expectedMission = new Mission(new Plateau(5, 5), Utils.toList(
+                new Rover(1, 2, Direction.N, "LMLMLMLMM"),
+                new Rover(3, 3, Direction.E, "MMRMMRMRRM")
+        ));
+        assert mission.equals(expectedMission);
+    }
+
+
     
 
 

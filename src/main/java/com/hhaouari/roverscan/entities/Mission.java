@@ -10,6 +10,9 @@ public class Mission {
     private Plateau plateau;
     private List<Rover> rovers;
 
+    public Mission() {
+    }
+
     public Mission(Plateau plateau, List<Rover> rovers) {
         this.plateau = plateau;
         this.rovers = rovers;
