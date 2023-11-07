@@ -10,11 +10,16 @@ public class Rover {
     private int x;
     private int y;
     private Direction direction;
+    private String instructions;
 
-    public Rover(int x, int y, Direction direction) {
+    public Rover() {
+    }
+
+    public Rover(int x, int y, Direction direction, String instructions) {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        this.instructions = instructions;
     }
 
     @Override
@@ -24,12 +29,13 @@ public class Rover {
         Rover rover = (Rover) o;
         return getX() == rover.getX() &&
                 getY() == rover.getY() &&
-                getDirection() == rover.getDirection();
+                getDirection().equals(rover.getDirection()) &&
+                getInstructions().equals(rover.getInstructions());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getX(), getY(), getDirection());
+        return Objects.hash(getX(), getY(), getDirection(), getInstructions());
     }
 
 

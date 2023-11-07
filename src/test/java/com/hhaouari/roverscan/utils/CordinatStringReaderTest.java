@@ -2,24 +2,36 @@ package com.hhaouari.roverscan.utils;
 
 import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
+import com.hhaouari.roverscan.entities.Rover;
+import com.hhaouari.roverscan.entities.enums.Direction;
 import com.jayway.jsonpath.internal.Utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class CordinateFileReaderTest {
+public class CordinatStringReaderTest {
 
     private static String FILE_PATH = "src/test/resources/input-case-1.txt.txt";
 
 
     @Test
     public void testReadingPlateauCordinate() {
-        CordinateFileReader cordinateFileReader = new CordinateFileReader();
+        CordinatStringReader cordinateFileReader = new CordinatStringReader();
         Plateau plateau = cordinateFileReader.readPlateauCordinate("5 5");
         Plateau expectedPlateau = new Plateau(5, 5);
 
         assert plateau.equals(expectedPlateau);
     }
+
+    @Test
+    public void testReadingRoverCordinate() {
+        CordinatStringReader cordinateFileReader = new CordinatStringReader();
+        Rover rover = cordinateFileReader.readRoverCordinate("1 2 N","LMLMLMLMM");
+        Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+        assert rover.equals(expectedRover);
+    }
+
+    
     
 
 
