@@ -4,7 +4,7 @@ import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
 
-public class CordinatStringReader {
+public class CordinateStringReader {
 
 
     public Plateau readPlateauCordinate(String s) {

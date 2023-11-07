@@ -8,15 +8,18 @@ import com.jayway.jsonpath.internal.Utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-public class CordinatStringReaderTest {
+import java.util.Arrays;
+import java.util.Collections;
 
-    private static String FILE_PATH = "src/test/resources/input-case-1.txt.txt";
+@SpringBootTest
+public class MissionFileReaderTest {
+
+    private static String FILE_PATH = "src/test/resources/input-case-1.txt";
 
 
     @Test
     public void testReadingPlateauCordinate() {
-        CordinatStringReader cordinateFileReader = new CordinatStringReader();
+        CordinateStringReader cordinateFileReader = new CordinateStringReader();
         Plateau plateau = cordinateFileReader.readPlateauCordinate("5 5");
         Plateau expectedPlateau = new Plateau(5, 5);
 
@@ -25,7 +28,7 @@ public class CordinatStringReaderTest {
 
     @Test
     public void testReadingRoverCordinate() {
-        CordinatStringReader cordinateFileReader = new CordinatStringReader();
+        CordinateStringReader cordinateFileReader = new CordinateStringReader();
         Rover rover = cordinateFileReader.readRoverCordinate("1 2 N","LMLMLMLMM");
         Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         assert rover.equals(expectedRover);
@@ -33,14 +36,17 @@ public class CordinatStringReaderTest {
 
     @Test
     public void testMission() {
-        CordinatFileReader cordinateFileReader = new CordinatFileReader();
-        Mission mission = new Mission();
-        cordinateFileReader.readMission(FILE_PATH, mission);
+        MissionFileReader cordinateFileReader = new MissionFileReader();
+        Mission mission = cordinateFileReader.readMission(FILE_PATH);
 
-        Mission expectedMission = new Mission(new Plateau(5, 5), Utils.toList(
+
+        Mission expectedMission = new Mission();
+        expectedMission.setPlateau(new Plateau(5, 5));
+        expectedMission.setRovers(Arrays.asList(
                 new Rover(1, 2, Direction.N, "LMLMLMLMM"),
                 new Rover(3, 3, Direction.E, "MMRMMRMRRM")
         ));
+
         assert mission.equals(expectedMission);
     }
 

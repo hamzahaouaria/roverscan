@@ -2,6 +2,7 @@ package com.hhaouari.roverscan.entities;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ public class Mission {
     private List<Rover> rovers;
 
     public Mission() {
+        this.rovers = new ArrayList<>();
     }
 
     public Mission(Plateau plateau, List<Rover> rovers) {
