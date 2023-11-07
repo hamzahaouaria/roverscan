@@ -30,7 +30,7 @@ public class Rover {
         return getX() == rover.getX() &&
                 getY() == rover.getY() &&
                 getDirection().equals(rover.getDirection()) &&
-                getInstructions().equals(rover.getInstructions());
+                String.valueOf(getInstructions()).equals(String.valueOf(rover.getInstructions()));
     }
 
     @Override
