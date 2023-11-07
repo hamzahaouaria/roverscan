@@ -13,6 +13,46 @@ public class RoverControlServiceTest {
 
 
     @Test
+    public void testCallLeftMethod() {
+        String instruction = "L";
+        Rover rover = new Rover(1, 2, Direction.N, instruction);
+        Plateau plateau = new Plateau(5, 5);
+        roverControlService.move(rover, plateau);
+        Rover expectedRover = new Rover(1, 2, Direction.W, null);
+        assert rover.equals(expectedRover);
+    }
+
+    @Test
+    public void testCallRightMethod() {
+        String instruction = "R";
+        Rover rover = new Rover(1, 2, Direction.N, instruction);
+        Plateau plateau = new Plateau(5, 5);
+        roverControlService.move(rover, plateau);
+        Rover expectedRover = new Rover(1, 2, Direction.E, null);
+        assert rover.equals(expectedRover);
+    }
+
+    @Test
+    public void testCallMoveForwardInYMethod() {
+        String instruction = "M";
+        Rover rover = new Rover(1, 2, Direction.N, instruction);
+        Plateau plateau = new Plateau(5, 5);
+        roverControlService.move(rover, plateau);
+        Rover expectedRover = new Rover(1, 3, Direction.N, null);
+        assert rover.equals(expectedRover);
+    }
+
+    @Test
+    public void testCallMoveForwardInXMethod() {
+        String instruction = "M";
+        Rover rover = new Rover(1, 2, Direction.S, instruction);
+        Plateau plateau = new Plateau(5, 5);
+        roverControlService.move(rover, plateau);
+        Rover expectedRover = new Rover(0, 2, Direction.N, null);
+        assert rover.equals(expectedRover);
+    }
+
+    @Test
     public void testTurnLeft() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         roverControlService.turnLeft(rover);
@@ -52,5 +92,7 @@ public class RoverControlServiceTest {
         assert rover.equals(expectedRover);
 
     }
+
+
 
 }
