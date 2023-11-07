@@ -9,4 +9,19 @@ public class RoverControlServiceImpl implements RoverControlService {
     public boolean move(Rover rover, Plateau plateau) {
         throw new RuntimeException("Not implemented yet");
     }
+
+    @Override
+    public boolean turnLeft(Rover rover) {
+        throw new RuntimeException("Not implemented yet");
+    }
+
+    @Override
+    public boolean turnRight(Rover rover) {
+        throw new RuntimeException("Not implemented yet");
+    }
+
+    @Override
+    public boolean moveForward(Rover rover, Plateau plateau) {
+        throw new RuntimeException("Not implemented yet");
+    }
 }

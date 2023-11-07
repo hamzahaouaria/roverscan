@@ -11,15 +11,45 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RoverControlServiceTest {
     RoverControlService roverControlService = new RoverControlServiceImpl();
 
+
+    @Test
+    public void testTurnLeft() {
+        Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+        roverControlService.turnLeft(rover);
+
+        Rover expectedRover = new Rover(1, 2, Direction.W, null);
+        assert rover.equals(expectedRover);
+
+    }
+
+    @Test
+    public void testTurnRight() {
+        Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+        roverControlService.turnRight(rover);
+
+        Rover expectedRover = new Rover(1, 2, Direction.E, null);
+        assert rover.equals(expectedRover);
+
+    }
+
+    @Test
+    public void testMoveForward() {
+        Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+        Plateau plateau = new Plateau(5, 5);
+        roverControlService.moveForward(rover, plateau);
+
+        Rover expectedRover = new Rover(1, 3, Direction.N, null);
+        assert rover.equals(expectedRover);
+    }
+
     @Test
     public void testMove() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         Plateau plateau = new Plateau(5, 5);
         roverControlService.move(rover, plateau);
 
-        Rover expectedRover = new Rover(1, 3, Direction.N, "LMLMLMLMM");
+        Rover expectedRover = new Rover(1, 3, Direction.N, null);
         assert rover.equals(expectedRover);
-
 
     }
 
