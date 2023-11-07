@@ -19,6 +19,9 @@ public class RoverControlServiceImpl implements RoverControlService {
     @Override
     public boolean move(Rover rover, Plateau plateau) {
         String roverInstructions = rover.getInstructions();
+        if (roverInstructions == null) {
+            return false;
+        }
         for (int i = 0; i < roverInstructions.length(); i++) {
             char instruction = roverInstructions.charAt(i);
             switch (instruction){

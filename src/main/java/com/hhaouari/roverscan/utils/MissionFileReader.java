@@ -36,4 +36,31 @@ public class MissionFileReader {
         }
 
     }
+
+    public boolean validateMission(String fileInput) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileInput)) ) {
+            String line;
+
+            line = reader.readLine();
+            if (!line.matches("\\d+ \\d+")) {
+                return false;
+            }
+
+
+            while (reader.ready()) {
+                String Position = reader.readLine();
+                String instructions = reader.readLine();
+                if (!Position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+")) {
+                    return false;
+                }
+
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 }
