@@ -12,31 +12,31 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class MissionFileReaderTest {
+class MissionFileReaderTest {
 
     private static final String FILE_PATH = "src/test/resources/input-case-1.txt";
 
     @Test
-    public void testReadingPlateauCordinate() {
-        CoordinateStringReader cordinateFileReader = new CoordinateStringReader();
-        Plateau plateau = cordinateFileReader.readPlateauCoordinate("5 5");
+    void testReadingPlateauCoordinate() {
+        CoordinateStringReader coordinateFileReader = new CoordinateStringReader();
+        Plateau plateau = coordinateFileReader.readPlateauCoordinate("5 5");
         Plateau expectedPlateau = new Plateau(5, 5);
 
-        assert plateau.equals(expectedPlateau);
+        assertEquals(expectedPlateau, plateau);
     }
 
     @Test
-    public void testReadingRoverCordinate() {
-        CoordinateStringReader cordinateFileReader = new CoordinateStringReader();
-        Rover rover = cordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
+    void testReadingRoverCoordinate() {
+        CoordinateStringReader coordinateFileReader = new CoordinateStringReader();
+        Rover rover = coordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
         Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         assertEquals(expectedRover, rover);
     }
 
     @Test
-    public void testMission() {
-        MissionFileReader cordinateFileReader = new MissionFileReader();
-        Mission mission = cordinateFileReader.readMission(FILE_PATH);
+    void testMission() {
+        MissionFileReader coordinateFileReader = new MissionFileReader();
+        Mission mission = coordinateFileReader.readMission(FILE_PATH);
 
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
@@ -44,34 +44,34 @@ public class MissionFileReaderTest {
                 new Rover(1, 2, Direction.N, "LMLMLMLMM"),
                 new Rover(3, 3, Direction.E, "MMRMMRMRRM")));
 
-        assert mission.equals(expectedMission);
+        assertEquals(expectedMission, mission);
     }
 
     @Test
-    public void testValidateMission() {
-        MissionFileReader cordinateFileReader = new MissionFileReader();
-        boolean isValid = cordinateFileReader.validateMission(FILE_PATH);
+    void testValidateMission() {
+        MissionFileReader coordinateFileReader = new MissionFileReader();
+        boolean isValid = coordinateFileReader.validateMission(FILE_PATH);
         assertTrue(isValid, "Test if a valid mission file is valid");
     }
 
     @Test
-    public void testValidateMissionWithInvalidFile() {
-        MissionFileReader cordinateFileReader = new MissionFileReader();
-        boolean isValid = cordinateFileReader.validateMission("src/test/resources/noexist.txt");
+    void testValidateMissionWithInvalidFile() {
+        MissionFileReader coordinateFileReader = new MissionFileReader();
+        boolean isValid = coordinateFileReader.validateMission("src/test/resources/noexist.txt");
         assertFalse(isValid, "Test if an invalid mission file is invalid for not found.");
     }
 
     @Test
-    public void testValidateMissionWithInvalidFile2() {
-        MissionFileReader cordinateFileReader = new MissionFileReader();
-        boolean isValid = cordinateFileReader.validateMission("src/test/resources/input-case-not-valid-1.txt");
+    void testValidateMissionWithInvalidFile2() {
+        MissionFileReader coordinateFileReader = new MissionFileReader();
+        boolean isValid = coordinateFileReader.validateMission("src/test/resources/input-case-not-valid-1.txt");
         assertFalse(isValid, "Test if an invalid mission file is invalid for wrong format plateau size.");
     }
 
     @Test
-    public void testValidateMissionWithInvalidFile3() {
-        MissionFileReader cordinateFileReader = new MissionFileReader();
-        boolean isValid = cordinateFileReader.validateMission("src/test/resources/input-case-not-valid-2.txt");
+    void testValidateMissionWithInvalidFile3() {
+        MissionFileReader coordinateFileReader = new MissionFileReader();
+        boolean isValid = coordinateFileReader.validateMission("src/test/resources/input-case-not-valid-2.txt");
         assertFalse(isValid, "Test if an invalid mission file is invalid for wrong format rover position.");
     }
 

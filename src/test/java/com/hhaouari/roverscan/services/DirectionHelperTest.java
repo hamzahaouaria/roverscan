@@ -5,62 +5,63 @@ import com.hhaouari.roverscan.services.impl.DirectionHelperImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class DirectionHelperTest {
+class DirectionHelperTest {
     DirectionHelper directionHelper = new DirectionHelperImpl();
 
     @Test
-    public void testGetNewDirectionNToL() {
+    void testGetNewDirectionNToL() {
         Direction direction = directionHelper.getNewDirection(Direction.N, 'L');
-        assert direction.equals(Direction.W);
+        assertEquals(Direction.W, direction);
     }
 
     @Test
-    public void testGetNewDirectionNToR() {
+    void testGetNewDirectionNToR() {
         Direction direction = directionHelper.getNewDirection(Direction.N, 'R');
-        assert direction.equals(Direction.E);
+        assertEquals(Direction.E,direction);
     }
 
     @Test
-    public void testGetNewDirectionSToL() {
+    void testGetNewDirectionSToL() {
         Direction direction = directionHelper.getNewDirection(Direction.S, 'L');
-        assert direction.equals(Direction.E);
+        assertEquals(Direction.E,direction);
     }
 
     @Test
-    public void testGetNewDirectionSToR() {
+    void testGetNewDirectionSToR() {
         Direction direction = directionHelper.getNewDirection(Direction.S, 'R');
-        assert direction.equals(Direction.W);
+        assertEquals(Direction.W,direction);
     }
 
     @Test
-    public void testGetNewDirectionEToL() {
+    void testGetNewDirectionEToL() {
         Direction direction = directionHelper.getNewDirection(Direction.E, 'L');
-        assert direction.equals(Direction.N);
+        assertEquals(Direction.N,direction);
     }
 
     @Test
-    public void testGetNewDirectionEToR() {
+    void testGetNewDirectionEToR() {
         Direction direction = directionHelper.getNewDirection(Direction.E, 'R');
-        assert direction.equals(Direction.S);
+        assertEquals(Direction.S,direction);
     }
 
     @Test
-    public void testGetNewDirectionWToL() {
+    void testGetNewDirectionWToL() {
         Direction direction = directionHelper.getNewDirection(Direction.W, 'L');
-        assert direction.equals(Direction.S);
+        assertEquals(Direction.S,direction);
     }
 
     @Test
-    public void testGetNewDirectionWToR() {
+    void testGetNewDirectionWToR() {
         Direction direction = directionHelper.getNewDirection(Direction.W, 'R');
-        assert direction.equals(Direction.N);
+        assertEquals(Direction.N,direction);
     }
 
     @Test
-    public void testGetNewDirectionNToM() {
+    void testGetNewDirectionNToM() {
         assertThrows(RuntimeException.class, () -> {
             directionHelper.getNewDirection(Direction.N, 'M');
         });

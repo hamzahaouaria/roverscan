@@ -13,7 +13,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class MissionControlServiceTest {
+class MissionControlServiceTest {
 
     private static final String FILE_PATH = "src/test/resources/input-case-1.txt";
 
@@ -23,7 +23,7 @@ public class MissionControlServiceTest {
     private final MissionControlService missionControlService = new MissionControlServiceImpl();
 
     @Test
-    public void testMission() {
+    void testMission() {
         Mission mission = missionControlService.execute(FILE_PATH);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
@@ -35,7 +35,7 @@ public class MissionControlServiceTest {
     }
 
     @Test
-    public void testMission2() {
+    void testMission2() {
         Mission mission = missionControlService.execute(FILE_PATH_2);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(10, 10));

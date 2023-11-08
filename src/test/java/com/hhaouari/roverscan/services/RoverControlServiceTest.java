@@ -10,12 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RoverControlServiceTest {
+class RoverControlServiceTest {
     RoverControlService roverControlService = new RoverControlServiceImpl();
 
 
     @Test
-    public void testCallLeftMethod() {
+    void testCallLeftMethod() {
         String instruction = "L";
         Rover rover = new Rover(1, 2, Direction.N, instruction);
         roverControlService.turnLeft(rover);
@@ -25,17 +25,16 @@ public class RoverControlServiceTest {
     }
 
     @Test
-    public void testCallRightMethod() {
+    void testCallRightMethod() {
         String instruction = "R";
         Rover rover = new Rover(1, 2, Direction.N, instruction);
-        Plateau plateau = new Plateau(5, 5);
         roverControlService.turnRight(rover);
         Rover expectedRover = new Rover(1, 2, Direction.E, instruction);
         assertEquals(expectedRover,rover);
     }
 
     @Test
-    public void testCallMoveForwardInYMethod() {
+    void testCallMoveForwardInYMethod() {
         String instruction = "M";
         Rover rover = new Rover(1, 2, Direction.N, instruction);
         Plateau plateau = new Plateau(5, 5);
@@ -45,7 +44,7 @@ public class RoverControlServiceTest {
     }
 
     @Test
-    public void testCallMoveForwardInXMethod() {
+    void testCallMoveForwardInXMethod() {
         String instruction = "M";
         Rover rover = new Rover(1, 2, Direction.E, instruction);
         Plateau plateau = new Plateau(5, 5);
@@ -55,55 +54,49 @@ public class RoverControlServiceTest {
     }
 
     @Test
-    public void testTurnLeft() {
+    void testTurnLeft() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         roverControlService.turnLeft(rover);
-
         Rover expectedRover = new Rover(1, 2, Direction.W, "LMLMLMLMM");
         assertEquals(expectedRover,rover);
 
     }
 
     @Test
-    public void testTurnRight() {
+    void testTurnRight() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         roverControlService.turnRight(rover);
-
         Rover expectedRover = new Rover(1, 2, Direction.E, "LMLMLMLMM");
         assertEquals(expectedRover,rover);
 
     }
 
     @Test
-    public void testMoveForward() {
+    void testMoveForward() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         Plateau plateau = new Plateau(5, 5);
         roverControlService.moveForward(rover, plateau);
-
         Rover expectedRover = new Rover(1, 3, Direction.N, "LMLMLMLMM");
         assertEquals(expectedRover,rover);
     }
 
     @Test
-    public void testMove() {
+    void testMove() {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         Plateau plateau = new Plateau(5, 5);
         roverControlService.move(rover, plateau);
-
         Rover expectedRover = new Rover(1, 3, Direction.N, null);
         assertEquals(rover, expectedRover);
 
     }
 
     @Test
-    public void testMove2() {
+    void testMove2() {
         Rover rover = new Rover(3, 3, Direction.E, "MMRMMRMRRM");
         Plateau plateau = new Plateau(5, 5);
         roverControlService.move(rover, plateau);
-
         Rover expectedRover = new Rover(5, 1, Direction.E, null);
         assertEquals(rover, expectedRover);
-
     }
 
 
