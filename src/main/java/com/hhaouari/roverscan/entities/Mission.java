@@ -46,4 +46,14 @@ public class Mission {
     public int hashCode() {
         return Objects.hash(getPlateau(), getRovers());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Rover rover : rovers) {
+            sb.append(rover.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

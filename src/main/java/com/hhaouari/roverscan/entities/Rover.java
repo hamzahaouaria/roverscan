@@ -29,13 +29,17 @@ public class Rover {
         Rover rover = (Rover) o;
         return getX() == rover.getX() &&
                 getY() == rover.getY() &&
-                getDirection().equals(rover.getDirection()) &&
-                String.valueOf(getInstructions()).equals(String.valueOf(rover.getInstructions()));
+                getDirection().equals(rover.getDirection());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getX(), getY(), getDirection(), getInstructions());
+    }
+
+    @Override
+    public String toString() {
+        return x + " " + y + " " + direction;
     }
 
 

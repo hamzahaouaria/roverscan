@@ -33,7 +33,7 @@ public class MissionFileReaderTest {
         CordinateStringReader cordinateFileReader = new CordinateStringReader();
         Rover rover = cordinateFileReader.readRoverCordinate("1 2 N","LMLMLMLMM");
         Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
-        assert rover.equals(expectedRover);
+        assertEquals(expectedRover,rover);
     }
 
     @Test
