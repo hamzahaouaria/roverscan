@@ -3,11 +3,13 @@ package com.hhaouari.roverscan.services.impl;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.services.DirectionHelper;
+import com.hhaouari.roverscan.services.PositionHelper;
 import com.hhaouari.roverscan.services.RoverControlService;
 
 public class RoverControlServiceImpl implements RoverControlService {
 
     DirectionHelper directionHelper = new DirectionHelperImpl();
+    PositionHelper positionHelper = new PositionHelperImpl();
 
     /**
      * Move the rover according to the instructions and the plateau
@@ -65,29 +67,19 @@ public class RoverControlServiceImpl implements RoverControlService {
     @Override
     public boolean moveForward(Rover rover, Plateau plateau) {
 
-        // TODO: (Refactor) Separate the logic of position handling in a separate class
-        switch (rover.getDirection()) {
-            case N -> {
-                if (rover.getY() < plateau.getN()) {
-                    rover.setY(rover.getY() + 1);
-                }
-            }
-            case S -> {
-                if (rover.getY() > 0) {
-                    rover.setY(rover.getY() - 1);
-                }
-            }
-            case E -> {
-                if (rover.getX() < plateau.getM()) {
-                    rover.setX(rover.getX() + 1);
-                }
-            }
-            case W -> {
-                if (rover.getX() > 0) {
-                    rover.setX(rover.getX() - 1);
-                }
-            }
-        }
-        return true;
+        boolean isMoveDone;
+
+        isMoveDone = moveForwardAccordingToDirection(rover, plateau);
+        return isMoveDone;
     }
+
+    private boolean moveForwardAccordingToDirection(Rover rover, Plateau plateau) {
+        return switch (rover.getDirection()) {
+            case N -> positionHelper.moveForwardNorth(rover, plateau);
+            case S -> positionHelper.moveForwardSouth(rover);
+            case E -> positionHelper.moveForwardEast(rover, plateau);
+            case W -> positionHelper.moveForwardWest(rover);
+        };
+    }
+
 }
