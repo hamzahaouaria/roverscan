@@ -37,17 +37,16 @@ public class MissionFileReader {
     }
 
     private Plateau readPlateauFromReader(BufferedReader reader) throws IOException {
-        String line;
-        line = reader.readLine();
+        String line = reader.readLine();
         return coordinateStringReader.readPlateauCoordinate(line);
     }
 
     public boolean validateMission(String fileInput) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
-            if (validatePlateauInput(reader)) return false;
+            if (isPlateauInputValid(reader)) return false;
 
             while (reader.ready()) {
-                if (validateRoverInput(reader)) return false;
+                if (isRoverInputValid(reader)) return false;
             }
             return true;
         } catch (IOException e) {
@@ -56,13 +55,13 @@ public class MissionFileReader {
 
     }
 
-    private static boolean validateRoverInput(BufferedReader reader) throws IOException {
+    private static boolean isRoverInputValid(BufferedReader reader) throws IOException {
         String position = reader.readLine();
         String instructions = reader.readLine();
         return !position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+");
     }
 
-    private static boolean validatePlateauInput(BufferedReader reader) throws IOException {
+    private static boolean isPlateauInputValid(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         return !line.matches("\\d+ \\d+");
     }

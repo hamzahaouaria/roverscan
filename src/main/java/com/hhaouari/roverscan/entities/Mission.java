@@ -28,9 +28,9 @@ public class Mission {
         this.rovers.remove(rover);
     }
 
-    public void setPlateauSize(int m, int n) {
-        this.plateau.setM(m);
-        this.plateau.setN(n);
+    public void setPlateauSize(int width, int height) {
+        this.plateau.setWidth(width);
+        this.plateau.setHeight(height);
     }
 
     @Override

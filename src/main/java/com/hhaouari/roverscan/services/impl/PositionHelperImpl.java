@@ -17,7 +17,7 @@ public class PositionHelperImpl implements PositionHelper {
 
     @Override
     public boolean moveForwardEast(Rover rover, Plateau plateau) {
-        if (rover.getX() < plateau.getM()) {
+        if (rover.getX() < plateau.getWidth()) {
             rover.setX(rover.getX() + 1);
             return true;
         } else {
@@ -37,7 +37,7 @@ public class PositionHelperImpl implements PositionHelper {
 
     @Override
     public boolean moveForwardNorth(Rover rover, Plateau plateau) {
-        if (rover.getY() < plateau.getN()) {
+        if (rover.getY() < plateau.getWidth()) {
             rover.setY(rover.getY() + 1);
             return true;
         } else {

@@ -7,5 +7,5 @@ public interface MissionControlService {
 
     boolean validate(String fileInput);
 
-    Mission runMission(Mission mission);
+    void runMissionRoversInstructions(Mission mission);
 }
