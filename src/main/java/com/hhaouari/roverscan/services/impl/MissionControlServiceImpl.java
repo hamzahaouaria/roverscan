@@ -1,13 +1,9 @@
 package com.hhaouari.roverscan.services.impl;
 
 import com.hhaouari.roverscan.entities.Mission;
-import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.services.MissionControlService;
 import com.hhaouari.roverscan.services.RoverControlService;
 import com.hhaouari.roverscan.utils.MissionFileReader;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MissionControlServiceImpl implements MissionControlService {
 
@@ -17,21 +13,19 @@ public class MissionControlServiceImpl implements MissionControlService {
     @Override
     public Mission execute(String fileInput) {
         Mission mission = missionFileReader.readMission(fileInput);
-        mission = runMission(mission);
+        runMission(mission);
         return runMission(mission);
     }
 
     @Override
     public boolean validate(String fileInput) {
         return missionFileReader.validateMission(fileInput);
-
     }
 
     @Override
     public Mission runMission(Mission mission) {
-        mission.getRovers().stream().forEach(rover -> {
-                roverControlService.move(rover, mission.getPlateau());
-            }
+        mission.getRovers().forEach(rover ->
+                roverControlService.move(rover, mission.getPlateau())
         );
         return mission;
     }
