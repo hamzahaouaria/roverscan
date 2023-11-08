@@ -20,9 +20,10 @@ public class Plateau {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Plateau)) return false;
-        Plateau plateau = (Plateau) o;
+        if (this == o)
+            return true;
+        if (!(o instanceof Plateau plateau))
+            return false;
         return getM() == plateau.getM() &&
                 getN() == plateau.getN();
     }
@@ -31,6 +32,5 @@ public class Plateau {
     public int hashCode() {
         return Objects.hash(getM(), getN());
     }
-
 
 }

@@ -24,9 +24,10 @@ public class Rover {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Rover)) return false;
-        Rover rover = (Rover) o;
+        if (this == o)
+            return true;
+        if (!(o instanceof Rover rover))
+            return false;
         return getX() == rover.getX() &&
                 getY() == rover.getY() &&
                 getDirection().equals(rover.getDirection());
@@ -41,6 +42,5 @@ public class Rover {
     public String toString() {
         return x + " " + y + " " + direction;
     }
-
 
 }

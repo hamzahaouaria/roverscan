@@ -24,12 +24,10 @@ public class RoverControlServiceImpl implements RoverControlService {
         }
         for (int i = 0; i < roverInstructions.length(); i++) {
             char instruction = roverInstructions.charAt(i);
-            switch (instruction){
-                case 'M':
-                    moveForward(rover, plateau);
-                    break;
-                default:
-                    rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), instruction));
+            if (instruction == 'M') {
+                moveForward(rover, plateau);
+            } else {
+                rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), instruction));
             }
         }
         rover.setInstructions(null);

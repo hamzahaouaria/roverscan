@@ -61,7 +61,7 @@ public class DirectionHelperTest {
 
     @Test
     public void testGetNewDirectionNToM() {
-         assertThrows(RuntimeException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             directionHelper.getNewDirection(Direction.N, 'M');
         });
     }

@@ -6,7 +6,6 @@ import com.hhaouari.roverscan.entities.enums.Direction;
 
 public class CordinateStringReader {
 
-
     public Plateau readPlateauCordinate(String s) {
         String[] cordinates = s.split(" ");
         return new Plateau(Integer.parseInt(cordinates[0]), Integer.parseInt(cordinates[1]));

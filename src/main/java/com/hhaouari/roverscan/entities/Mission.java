@@ -36,8 +36,7 @@ public class Mission {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Mission)) return false;
-        Mission mission = (Mission) o;
+        if (!(o instanceof Mission mission)) return false;
         return getPlateau().equals(mission.getPlateau()) &&
                 getRovers().equals(mission.getRovers());
     }
