@@ -1,38 +1,39 @@
 package com.hhaouari.roverscan.services.impl;
 
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.exceptions.DirectionInvalidInstructionException;
 import com.hhaouari.roverscan.services.DirectionHelper;
 
 public class DirectionHelperImpl implements DirectionHelper {
 
-    // TODO: (Refactor) Separate the logic of direction handling in a separate class
     @Override
     public Direction getNewDirection(Direction currentDirection, char newDirectionInstruction) {
         switch (newDirectionInstruction) {
-            case 'L':
-                switch (currentDirection) {
-                    case N:
-                        return Direction.W;
-                    case S:
-                        return Direction.E;
-                    case E:
-                        return Direction.N;
-                    case W:
-                        return Direction.S;
-                }
-            case 'R':
-                switch (currentDirection) {
-                    case N:
-                        return Direction.E;
-                    case S:
-                        return Direction.W;
-                    case E:
-                        return Direction.S;
-                    case W:
-                        return Direction.N;
-                }
-            default:
-                throw new RuntimeException("Invalid direction instruction");
+            case 'L' -> {
+                return getDirectionAfterLeftTurn(currentDirection);
+            }
+            case 'R' -> {
+                return getDirectionAfterRightTurn(currentDirection);
+            }
+            default -> throw new DirectionInvalidInstructionException("Invalid direction instruction: " + newDirectionInstruction );
         }
+    }
+
+    private static Direction getDirectionAfterRightTurn(Direction currentDirection) {
+        return switch (currentDirection) {
+            case N -> Direction.E;
+            case S -> Direction.W;
+            case E -> Direction.S;
+            case W -> Direction.N;
+        };
+    }
+
+    private static Direction getDirectionAfterLeftTurn(Direction currentDirection) {
+        return switch (currentDirection) {
+            case N -> Direction.W;
+            case S -> Direction.E;
+            case E -> Direction.N;
+            case W -> Direction.S;
+        };
     }
 }
