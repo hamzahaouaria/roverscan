@@ -1,5 +1,6 @@
 package com.hhaouari.roverscan.utils;
 
+import com.hhaouari.roverscan.constants.TestResources;
 import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
@@ -13,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MissionFileReaderTest {
-
-    private static final String FILE_PATH = "src/test/resources/input-case-1.txt";
 
     @Test
     void testReadingPlateauCoordinate() {
@@ -36,7 +35,7 @@ class MissionFileReaderTest {
     @Test
     void testMission() {
         MissionFileReader coordinateFileReader = new MissionFileReader();
-        Mission mission = coordinateFileReader.readMission(FILE_PATH);
+        Mission mission = coordinateFileReader.readMission(TestResources.SAMPLE_TEST_CASE_BASIC);
 
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
@@ -50,29 +49,29 @@ class MissionFileReaderTest {
     @Test
     void testValidateMission() {
         MissionFileReader coordinateFileReader = new MissionFileReader();
-        boolean isValid = coordinateFileReader.validateMission(FILE_PATH);
-        assertTrue(isValid, "Test if a valid mission file is valid");
+        boolean isValid = coordinateFileReader.validateMission(TestResources.SAMPLE_TEST_CASE_BASIC);
+        assertTrue(isValid, TestResources.testFilesMessage().get(TestResources.SAMPLE_TEST_CASE_BASIC));
     }
 
     @Test
     void testValidateMissionWithInvalidFile() {
         MissionFileReader coordinateFileReader = new MissionFileReader();
-        boolean isValid = coordinateFileReader.validateMission("src/test/resources/noexist.txt");
-        assertFalse(isValid, "Test if an invalid mission file is invalid for not found.");
+        boolean isValid = coordinateFileReader.validateMission(TestResources.SRC_TEST_RESOURCES_NOEXIST_TXT);
+        assertFalse(isValid, TestResources.testFilesMessage().get(TestResources.SRC_TEST_RESOURCES_NOEXIST_TXT));
     }
 
     @Test
     void testValidateMissionWithInvalidFile2() {
         MissionFileReader coordinateFileReader = new MissionFileReader();
-        boolean isValid = coordinateFileReader.validateMission("src/test/resources/input-case-not-valid-1.txt");
-        assertFalse(isValid, "Test if an invalid mission file is invalid for wrong format plateau size.");
+        boolean isValid = coordinateFileReader.validateMission(TestResources.NOT_VALID_PLATEAU_SIZE);
+        assertFalse(isValid, TestResources.testFilesMessage().get(TestResources.NOT_VALID_PLATEAU_SIZE));
     }
 
     @Test
     void testValidateMissionWithInvalidFile3() {
         MissionFileReader coordinateFileReader = new MissionFileReader();
-        boolean isValid = coordinateFileReader.validateMission("src/test/resources/input-case-not-valid-2.txt");
-        assertFalse(isValid, "Test if an invalid mission file is invalid for wrong format rover position.");
+        boolean isValid = coordinateFileReader.validateMission(TestResources.NOT_VALID_ROVER_POSITION);
+        assertFalse(isValid, TestResources.testFilesMessage().get(TestResources.NOT_VALID_ROVER_POSITION));
     }
 
 }
