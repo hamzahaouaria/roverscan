@@ -5,6 +5,7 @@ import com.hhaouari.roverscan.services.DirectionHelper;
 
 public class DirectionHelperImpl implements DirectionHelper {
 
+    // TODO: (Refactor) Separate the logic of direction handling in a separate class
     @Override
     public Direction getNewDirection(Direction currentDirection, char newDirectionInstruction) {
         switch (newDirectionInstruction) {

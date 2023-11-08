@@ -18,8 +18,8 @@ public class MissionFileReaderTest {
 
     @Test
     public void testReadingPlateauCordinate() {
-        CordinateStringReader cordinateFileReader = new CordinateStringReader();
-        Plateau plateau = cordinateFileReader.readPlateauCordinate("5 5");
+        CoordinateStringReader cordinateFileReader = new CoordinateStringReader();
+        Plateau plateau = cordinateFileReader.readPlateauCoordinate("5 5");
         Plateau expectedPlateau = new Plateau(5, 5);
 
         assert plateau.equals(expectedPlateau);
@@ -27,8 +27,8 @@ public class MissionFileReaderTest {
 
     @Test
     public void testReadingRoverCordinate() {
-        CordinateStringReader cordinateFileReader = new CordinateStringReader();
-        Rover rover = cordinateFileReader.readRoverCordinate("1 2 N", "LMLMLMLMM");
+        CoordinateStringReader cordinateFileReader = new CoordinateStringReader();
+        Rover rover = cordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
         Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         assertEquals(expectedRover, rover);
     }

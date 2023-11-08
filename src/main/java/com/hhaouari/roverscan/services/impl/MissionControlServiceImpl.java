@@ -29,12 +29,10 @@ public class MissionControlServiceImpl implements MissionControlService {
 
     @Override
     public Mission runMission(Mission mission) {
-        List<Rover> rovers = mission.getRovers().stream().map(rover -> {
-                    roverControlService.move(rover, mission.getPlateau());
-                    return rover;
-                }
-
-        ).collect(Collectors.toList());
+        mission.getRovers().stream().forEach(rover -> {
+                roverControlService.move(rover, mission.getPlateau());
+            }
+        );
         return mission;
     }
 }

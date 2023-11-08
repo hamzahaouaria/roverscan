@@ -64,27 +64,29 @@ public class RoverControlServiceImpl implements RoverControlService {
      */
     @Override
     public boolean moveForward(Rover rover, Plateau plateau) {
-        switch (rover.getDirection()){
-            case N:
-                if(rover.getY() < plateau.getN()){
+
+        // TODO: (Refactor) Separate the logic of position handling in a separate class
+        switch (rover.getDirection()) {
+            case N -> {
+                if (rover.getY() < plateau.getN()) {
                     rover.setY(rover.getY() + 1);
                 }
-                break;
-            case S:
-                if(rover.getY() > 0){
+            }
+            case S -> {
+                if (rover.getY() > 0) {
                     rover.setY(rover.getY() - 1);
                 }
-                break;
-            case E:
-                if(rover.getX() < plateau.getM()){
+            }
+            case E -> {
+                if (rover.getX() < plateau.getM()) {
                     rover.setX(rover.getX() + 1);
                 }
-                break;
-            case W:
-                if(rover.getX() > 0){
+            }
+            case W -> {
+                if (rover.getX() > 0) {
                     rover.setX(rover.getX() - 1);
                 }
-                break;
+            }
         }
         return true;
     }

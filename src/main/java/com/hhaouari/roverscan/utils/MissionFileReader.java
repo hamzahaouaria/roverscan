@@ -3,27 +3,26 @@ package com.hhaouari.roverscan.utils;
 import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class MissionFileReader {
 
     public Mission readMission(String filePath) {
-        CordinateStringReader cordinatStringReader = new CordinateStringReader();
+        // TODO: (Refactor) this method is too long, split it into smaller methods
+        CoordinateStringReader coordinateStringReader = new CoordinateStringReader();
         Mission mission = new Mission();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
             line = reader.readLine();
-            Plateau plateau = cordinatStringReader.readPlateauCordinate(line);
+            Plateau plateau = coordinateStringReader.readPlateauCoordinate(line);
             mission.setPlateau(plateau);
 
             while ((line = reader.readLine()) != null) {
-                Rover rover = cordinatStringReader.readRoverCordinate(line, reader.readLine());
+                Rover rover = coordinateStringReader.readRoverCoordinate(line, reader.readLine());
                 mission.addRover(rover);
             }
             return mission;
@@ -35,7 +34,7 @@ public class MissionFileReader {
     }
 
     public boolean validateMission(String fileInput) {
-
+        // TODO: (Refactor) this method is too long, split it into smaller methods
         try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
             String line;
 
