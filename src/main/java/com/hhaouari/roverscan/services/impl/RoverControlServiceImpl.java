@@ -3,11 +3,13 @@ package com.hhaouari.roverscan.services.impl;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.services.DirectionHelper;
+import com.hhaouari.roverscan.services.PositionHelper;
 import com.hhaouari.roverscan.services.RoverControlService;
 
 public class RoverControlServiceImpl implements RoverControlService {
 
     DirectionHelper directionHelper = new DirectionHelperImpl();
+    PositionHelper positionHelper = new PositionHelperImpl();
 
     /**
      * Move the rover according to the instructions and the plateau
@@ -24,12 +26,10 @@ public class RoverControlServiceImpl implements RoverControlService {
         }
         for (int i = 0; i < roverInstructions.length(); i++) {
             char instruction = roverInstructions.charAt(i);
-            switch (instruction){
-                case 'M':
-                    moveForward(rover, plateau);
-                    break;
-                default:
-                    rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), instruction));
+            if (instruction == 'M') {
+                moveForward(rover, plateau);
+            } else {
+                rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), instruction));
             }
         }
         rover.setInstructions(null);
@@ -66,28 +66,20 @@ public class RoverControlServiceImpl implements RoverControlService {
      */
     @Override
     public boolean moveForward(Rover rover, Plateau plateau) {
-        switch (rover.getDirection()){
-            case N:
-                if(rover.getY() < plateau.getN()){
-                    rover.setY(rover.getY() + 1);
-                }
-                break;
-            case S:
-                if(rover.getY() > 0){
-                    rover.setY(rover.getY() - 1);
-                }
-                break;
-            case E:
-                if(rover.getX() < plateau.getM()){
-                    rover.setX(rover.getX() + 1);
-                }
-                break;
-            case W:
-                if(rover.getX() > 0){
-                    rover.setX(rover.getX() - 1);
-                }
-                break;
-        }
-        return true;
+
+        boolean isMoveDone;
+
+        isMoveDone = moveForwardAccordingToDirection(rover, plateau);
+        return isMoveDone;
     }
+
+    private boolean moveForwardAccordingToDirection(Rover rover, Plateau plateau) {
+        return switch (rover.getDirection()) {
+            case N -> positionHelper.moveForwardNorth(rover, plateau);
+            case S -> positionHelper.moveForwardSouth(rover);
+            case E -> positionHelper.moveForwardEast(rover, plateau);
+            case W -> positionHelper.moveForwardWest(rover);
+        };
+    }
+
 }
