@@ -43,6 +43,12 @@ INPUT AND OUTPUT
 -- 1 3 N
 -- 5 1 E
 
+How to packge (Windows)
+- .\mvnw.cmd clean package
+- cp target\roverscan-0.0.1-SNAPSHOT.jar rover.jar
+- java -jar rover.jar input.txt
+
+
 COMMAND LINE:
 The program will be runned with this command line:
 
