@@ -13,8 +13,8 @@ public class MissionControlServiceImpl implements MissionControlService {
     @Override
     public Mission execute(String fileInput) {
         Mission mission = missionFileReader.readMission(fileInput);
-        runMission(mission);
-        return runMission(mission);
+        runMissionRoversInstructions(mission);
+        return mission;
     }
 
     @Override
@@ -23,10 +23,9 @@ public class MissionControlServiceImpl implements MissionControlService {
     }
 
     @Override
-    public Mission runMission(Mission mission) {
+    public void runMissionRoversInstructions(Mission mission) {
         mission.getRovers().forEach(rover ->
                 roverControlService.move(rover, mission.getPlateau())
         );
-        return mission;
     }
 }

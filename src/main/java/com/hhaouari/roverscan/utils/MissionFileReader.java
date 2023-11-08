@@ -37,17 +37,17 @@ public class MissionFileReader {
     }
 
     private Plateau readPlateauFromReader(BufferedReader reader) throws IOException {
-        String line;
-        line = reader.readLine();
+        String line = reader.readLine();
         return coordinateStringReader.readPlateauCoordinate(line);
     }
 
     public boolean validateMission(String fileInput) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
-            if (validatePlateauInput(reader)) return false;
-
+            String plateauLine = reader.readLine();
+            if (!isPlateauInputValid(plateauLine)) return false;
+            Plateau plateau = coordinateStringReader.readPlateauCoordinate(plateauLine);
             while (reader.ready()) {
-                if (validateRoverInput(reader)) return false;
+                if (!isRoverInputValid(reader,plateau)) return false;
             }
             return true;
         } catch (IOException e) {
@@ -56,14 +56,26 @@ public class MissionFileReader {
 
     }
 
-    private static boolean validateRoverInput(BufferedReader reader) throws IOException {
+    private static boolean isRoverInputValid(BufferedReader reader,Plateau plateau) throws IOException {
         String position = reader.readLine();
         String instructions = reader.readLine();
-        return !position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+");
+         if(!position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+")){
+             return false;
+         } else {
+             String[] positionCoordinates = position.split(" ");
+             int x = Integer.parseInt(positionCoordinates[0]);
+             int y = Integer.parseInt(positionCoordinates[1]);
+             if(x > plateau.getWidth() || y > plateau.getHeight()) return false;
+             return x >= 0 && y >= 0;
+         }
+
     }
 
-    private static boolean validatePlateauInput(BufferedReader reader) throws IOException {
-        String line = reader.readLine();
-        return !line.matches("\\d+ \\d+");
+    private static boolean isPlateauInputValid(String plateauLine) {
+        if(!plateauLine.matches("\\d+ \\d+")) return false;
+        String[] plateauCoordinates = plateauLine.split(" ");
+        int width = Integer.parseInt(plateauCoordinates[0]);
+        int height = Integer.parseInt(plateauCoordinates[1]);
+        return width >= 0 && height >= 0;
     }
 }

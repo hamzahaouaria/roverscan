@@ -6,13 +6,12 @@ import java.util.Objects;
 
 @Data
 public class Plateau {
-    // Plateau size m x n
-    private int m;
-    private int n;
+    private int height;
+    private int width;
 
-    public Plateau(int m, int n) {
-        this.m = m;
-        this.n = n;
+    public Plateau(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
     public Plateau() {
@@ -24,13 +23,13 @@ public class Plateau {
             return true;
         if (!(o instanceof Plateau plateau))
             return false;
-        return getM() == plateau.getM() &&
-                getN() == plateau.getN();
+        return getHeight() == plateau.getHeight() &&
+                getWidth() == plateau.getWidth();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getM(), getN());
+        return Objects.hash(getHeight(), getWidth());
     }
 
 }
