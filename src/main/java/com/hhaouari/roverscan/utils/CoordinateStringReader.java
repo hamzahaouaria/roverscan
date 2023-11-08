@@ -11,8 +11,8 @@ public class CoordinateStringReader {
         return getPlateauFromCoordinates(coordinates);
     }
 
-    public Rover readRoverCoordinate(String s, String instructions) {
-        String[] coordinates = s.split(" ");
+    public Rover readRoverCoordinate(String position, String instructions) {
+        String[] coordinates = position.split(" ");
         return getRoverFromCoordinates(instructions, coordinates);
     }
 

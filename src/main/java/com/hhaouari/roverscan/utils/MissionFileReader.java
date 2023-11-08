@@ -10,19 +10,16 @@ import java.io.IOException;
 
 public class MissionFileReader {
 
+    CoordinateStringReader coordinateStringReader = new CoordinateStringReader();
+
     public Mission readMission(String filePath) {
-        // TODO: (Refactor) this method is too long, split it into smaller methods
-        CoordinateStringReader coordinateStringReader = new CoordinateStringReader();
         Mission mission = new Mission();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-
-            line = reader.readLine();
-            Plateau plateau = coordinateStringReader.readPlateauCoordinate(line);
+            Plateau plateau = readPlateauFromReader(reader);
             mission.setPlateau(plateau);
 
-            while ((line = reader.readLine()) != null) {
-                Rover rover = coordinateStringReader.readRoverCoordinate(line, reader.readLine());
+            while (reader.ready()) {
+                Rover rover = readRoverFromReader(reader);
                 mission.addRover(rover);
             }
             return mission;
@@ -33,29 +30,40 @@ public class MissionFileReader {
 
     }
 
-    public boolean validateMission(String fileInput) {
-        // TODO: (Refactor) this method is too long, split it into smaller methods
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
-            String line;
+    private Rover readRoverFromReader(BufferedReader reader) throws IOException {
+        String position = reader.readLine();
+        String instructions = reader.readLine();
+        return coordinateStringReader.readRoverCoordinate(position, instructions);
+    }
 
-            line = reader.readLine();
-            if (!line.matches("\\d+ \\d+")) {
-                return false;
-            }
+    private Plateau readPlateauFromReader(BufferedReader reader) throws IOException {
+        String line;
+        line = reader.readLine();
+        return coordinateStringReader.readPlateauCoordinate(line);
+    }
+
+    public boolean validateMission(String fileInput) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
+            if (validatePlateauInput(reader)) return false;
 
             while (reader.ready()) {
-                String Position = reader.readLine();
-                String instructions = reader.readLine();
-                if (!Position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+")) {
-                    return false;
-                }
-
+                if (validateRoverInput(reader)) return false;
             }
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
 
+    }
+
+    private static boolean validateRoverInput(BufferedReader reader) throws IOException {
+        String position = reader.readLine();
+        String instructions = reader.readLine();
+        return !position.matches("\\d+ \\d+ [NSEW]") || !instructions.matches("[LRM]+");
+    }
+
+    private static boolean validatePlateauInput(BufferedReader reader) throws IOException {
+        String line = reader.readLine();
+        return !line.matches("\\d+ \\d+");
     }
 }
