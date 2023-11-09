@@ -1,5 +1,13 @@
 # roverscan
-This is the exercice requested by the interviwers
+This is the exercice requested by the interviewers
+
+# Java version
+
+This project is build using:
+- OpenJDK 17
+- Maven
+- Spring boot
+- Google Java formatter
 
 # The exercice
 
