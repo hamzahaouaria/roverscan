@@ -46,6 +46,7 @@ build/
 
 # Package Files #
 *.jar
+!rover.jar
 *.war
 *.nar
 *.ear
