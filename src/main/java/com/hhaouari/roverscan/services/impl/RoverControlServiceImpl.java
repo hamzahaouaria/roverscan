@@ -3,14 +3,14 @@ package com.hhaouari.roverscan.services.impl;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Instruction;
-import com.hhaouari.roverscan.services.DirectionHelper;
-import com.hhaouari.roverscan.services.PositionHelper;
+import com.hhaouari.roverscan.services.DirectionCalculatorService;
+import com.hhaouari.roverscan.services.PositionCalculatorService;
 import com.hhaouari.roverscan.services.RoverControlService;
 
 public class RoverControlServiceImpl implements RoverControlService {
 
-    DirectionHelper directionHelper = new DirectionHelperImpl();
-    PositionHelper positionHelper = new PositionHelperImpl();
+    DirectionCalculatorService directionHelper = new DirectionCalculatorServiceImpl();
+    PositionCalculatorService positionCalculatorService = new PositionCalculatorServiceImpl();
 
     /**
      * Move the rover according to the instructions and the plateau
@@ -76,12 +76,19 @@ public class RoverControlServiceImpl implements RoverControlService {
         return isMoveDone;
     }
 
+    /**
+     * Move the rover forward according to the plateau
+     *
+     * @param rover
+     * @param plateau
+     * @return true if the move is done successfully, false otherwise
+     */
     private boolean moveForwardAccordingToDirection(Rover rover, Plateau plateau) {
         return switch (rover.getDirection()) {
-            case N -> positionHelper.moveForwardNorth(rover, plateau);
-            case S -> positionHelper.moveForwardSouth(rover);
-            case E -> positionHelper.moveForwardEast(rover, plateau);
-            case W -> positionHelper.moveForwardWest(rover);
+            case N -> positionCalculatorService.moveForwardNorth(rover, plateau);
+            case S -> positionCalculatorService.moveForwardSouth(rover);
+            case E -> positionCalculatorService.moveForwardEast(rover, plateau);
+            case W -> positionCalculatorService.moveForwardWest(rover);
         };
     }
 

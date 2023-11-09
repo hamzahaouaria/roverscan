@@ -12,11 +12,24 @@ import java.nio.file.Paths;
 public class TerminalOutputUtil {
 
     MissionControlService missionControlService = new MissionControlServiceImpl();
+
+    /**
+     * Takes a file input of the mission, validates it and executes it
+     * returns the final terminal output with is a list of lines containing the final coordinates of the rovers
+     * @param fileInput file input
+     * @return final terminal output
+     */
     public String finalTerminalOutput(String fileInput) {
         Mission mission = missionControlService.execute(fileInput);
         return mission.toString();
     }
 
+    /**
+     * Takes terminal args of the mission, validates it and executes it
+     * returns the final terminal output with is a list of lines containing the final coordinates of the rovers
+     * @param args args
+     * @return final terminal output
+     */
     public String finalTerminalOutput(String[] args) {
         if (!validateArgs(args))
             return UserErrorMessagesConstants.USAGE;
@@ -26,6 +39,11 @@ public class TerminalOutputUtil {
         return finalTerminalOutput(fileInput).trim();
     }
 
+    /**
+     * Validate the terminal args and print the Error messges directly to the terminal
+     * @param args args
+     * @return true if the args are valid
+     */
     public boolean validateArgs(String[] args) {
         if (args.length == 0) {
             System.out.println("Please provide a file path as an argument");

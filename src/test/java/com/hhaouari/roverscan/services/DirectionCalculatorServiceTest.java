@@ -3,7 +3,7 @@ package com.hhaouari.roverscan.services;
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.entities.enums.Instruction;
 import com.hhaouari.roverscan.exceptions.DirectionInvalidInstructionException;
-import com.hhaouari.roverscan.services.impl.DirectionHelperImpl;
+import com.hhaouari.roverscan.services.impl.DirectionCalculatorServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class DirectionHelperTest {
-    DirectionHelper directionHelper;
+class DirectionCalculatorServiceTest {
+    DirectionCalculatorService directionHelper;
 
     @BeforeEach
     void setUp() {
-        directionHelper = new DirectionHelperImpl();
+        directionHelper = new DirectionCalculatorServiceImpl();
     }
 
     @AfterEach
