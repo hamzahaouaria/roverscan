@@ -22,6 +22,14 @@ public class Rover {
         this.instructions = instructions;
     }
 
+    public Rover(long x, long y, String direction, String instructions) {
+        this.x = x;
+        this.y = y;
+        this.direction = Direction.valueOf(direction);
+        this.instructions = instructions;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
