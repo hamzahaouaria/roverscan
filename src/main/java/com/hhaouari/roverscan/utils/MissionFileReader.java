@@ -12,6 +12,11 @@ public class MissionFileReader {
 
     CoordinateStringReader coordinateStringReader = new CoordinateStringReader();
 
+    /**
+     * Read the mission from the file and return the mission object with Plateau and Rovers
+     * @param filePath file path
+     * @return Mission object
+     */
     public Mission readMission(String filePath) {
         Mission mission = new Mission();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -30,17 +35,34 @@ public class MissionFileReader {
 
     }
 
+    /**
+     * Read two lines from the reader and return the rover object
+     * @param reader reader
+     * @return Rover object
+     * @throws IOException IOException
+     */
     private Rover readRoverFromReader(BufferedReader reader) throws IOException {
         String position = reader.readLine();
         String instructions = reader.readLine();
         return coordinateStringReader.readRoverCoordinate(position, instructions);
     }
 
+    /**
+     * Read the first line from the reader and return the plateau object
+     * @param reader reader
+     * @return Plateau object
+     * @throws IOException IOException
+     */
     private Plateau readPlateauFromReader(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         return coordinateStringReader.readPlateauCoordinate(line);
     }
 
+    /**
+     * Validate the mission file coordinates and instructions
+     * @param fileInput file input
+     * @return true if the file input is valid
+     */
     public boolean validateMission(String fileInput) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileInput))) {
             String plateauLine = reader.readLine();
@@ -58,6 +80,13 @@ public class MissionFileReader {
 
     }
 
+    /**
+     * Validate the rover coordinates and instructions
+     * @param reader reader
+     * @param plateau plateau
+     * @return true if the rover input is valid
+     * @throws IOException IOException
+     */
     private static boolean isRoverInputValid(BufferedReader reader, Plateau plateau) throws IOException {
         String position = reader.readLine();
         String instructions = reader.readLine();
@@ -74,6 +103,11 @@ public class MissionFileReader {
 
     }
 
+    /**
+     * Validate the plateau coordinates
+     * @param plateauLine plateau line
+     * @return true if the plateau input is valid
+     */
     private static boolean isPlateauInputValid(String plateauLine) {
         if (!plateauLine.matches("\\d+ \\d+"))
             return false;

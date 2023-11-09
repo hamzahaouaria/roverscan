@@ -76,6 +76,13 @@ public class RoverControlServiceImpl implements RoverControlService {
         return isMoveDone;
     }
 
+    /**
+     * Move the rover forward according to the plateau
+     *
+     * @param rover
+     * @param plateau
+     * @return true if the move is done successfully, false otherwise
+     */
     private boolean moveForwardAccordingToDirection(Rover rover, Plateau plateau) {
         return switch (rover.getDirection()) {
             case N -> positionHelper.moveForwardNorth(rover, plateau);
