@@ -3,6 +3,7 @@ package com.hhaouari.roverscan.utils;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.entities.enums.Instruction;
 
 public class CoordinateStringReader {
 
@@ -24,7 +25,11 @@ public class CoordinateStringReader {
         rover.setX(Long.parseLong(coordinates[0]));
         rover.setY(Long.parseLong(coordinates[1]));
         rover.setDirection(Direction.valueOf(coordinates[2]));
-        rover.setInstructions(instructions);
+        Instruction[] instructionsEnum = new Instruction[instructions.length()];
+        for (int i = 0; i < instructions.length(); i++) {
+            instructionsEnum[i] = Instruction.valueOf(String.valueOf(instructions.charAt(i)));
+        }
+        rover.setInstructions(instructionsEnum);
         return rover;
     }
 

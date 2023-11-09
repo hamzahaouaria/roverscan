@@ -3,6 +3,7 @@ package com.hhaouari.roverscan.utils;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.entities.enums.Instruction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class CoordinateStringReaderTest {
 
   private CoordinateStringReader coordinateFileReader;
+
+  private static final Instruction[] instructions1 = new Instruction[]{
+          Instruction.L,
+          Instruction.M,
+          Instruction.L,
+          Instruction.M,
+          Instruction.L,
+          Instruction.M,
+          Instruction.L,
+          Instruction.M,
+          Instruction.M};
 
   @BeforeEach
   void setUp() {
@@ -41,7 +53,7 @@ class CoordinateStringReaderTest {
   @Test
   void readRoverCoordinate() {
     Rover rover = coordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
-    Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+    Rover expectedRover = new Rover(1, 2, Direction.N, instructions1);
     assertEquals(expectedRover, rover);
   }
 }
