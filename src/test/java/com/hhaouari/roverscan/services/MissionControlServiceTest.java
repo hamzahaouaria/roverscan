@@ -5,7 +5,9 @@ import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.entities.enums.Instruction;
 import com.hhaouari.roverscan.services.impl.MissionControlServiceImpl;
+import org.apache.logging.log4j.util.IndexedStringMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,42 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MissionControlServiceTest {
 
     private MissionControlService missionControlService;
+
+    private static final Instruction[] instructions1 = new Instruction[]{
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.M};
+
+    //MMRMMRMRRM
+    private static final Instruction[] instructions2 = new Instruction[]{
+            Instruction.M,
+            Instruction.M,
+            Instruction.R,
+            Instruction.M,
+            Instruction.M,
+            Instruction.R,
+            Instruction.M,
+            Instruction.R,
+            Instruction.R,
+            Instruction.M};
+
+    Instruction[] outPlateauInstruction = new Instruction[]{
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M,
+            Instruction.M};
+
 
     @BeforeEach
     void setUp() {
@@ -36,8 +74,8 @@ class MissionControlServiceTest {
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(
-                new Rover(1, 3, Direction.N, null),
-                new Rover(5, 1, Direction.E, null)));
+                new Rover(1, 3, Direction.N, instructions1),
+                new Rover(5, 1, Direction.E, instructions2)));
         assertEquals(expectedMission, mission);
 
     }
@@ -65,14 +103,14 @@ class MissionControlServiceTest {
         Mission mission = new Mission();
         mission.setPlateau(new Plateau(5, 5));
         mission.setRovers(Arrays.asList(
-                new Rover(1, 2, Direction.N, "LMLMLMLMM"),
-                new Rover(3, 3, Direction.E, "MMRMMRMRRM")));
+                new Rover(1, 2, Direction.N, instructions1),
+                new Rover(3, 3, Direction.E, instructions2)));
         missionControlService.runMissionRoversInstructions(mission);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(
-                new Rover(1, 3, Direction.N, null),
-                new Rover(5, 1, Direction.E, null)));
+                new Rover(1, 3, Direction.N, instructions1),
+                new Rover(5, 1, Direction.E, instructions2)));
         assertEquals(expectedMission, mission);
     }
 
@@ -80,7 +118,7 @@ class MissionControlServiceTest {
     void testRunMissionRoversInstructionsOffPlateauLimit() {
         Mission mission = new Mission();
         mission.setPlateau(new Plateau(5, 5));
-        String outPlateauInstruction = "MMMMMMMMMMMMMMMMMM";
+
         mission.setRovers(Arrays.asList(
                 new Rover(1, 1, Direction.N, outPlateauInstruction),
                 new Rover(1, 1, Direction.E, outPlateauInstruction),
@@ -91,10 +129,11 @@ class MissionControlServiceTest {
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(
-                new Rover(1, 5, Direction.N, null),
-                new Rover(5, 1, Direction.E, null),
-                new Rover(1, 0, Direction.S, null),
-                new Rover(0, 1, Direction.W, null)));
+                new Rover(1, 5, Direction.N, outPlateauInstruction),
+                new Rover(5, 1, Direction.E, outPlateauInstruction),
+                new Rover(1, 0, Direction.S, outPlateauInstruction),
+                new Rover(0, 1, Direction.W, outPlateauInstruction)));
+
         assertEquals(expectedMission, mission);
 
     }

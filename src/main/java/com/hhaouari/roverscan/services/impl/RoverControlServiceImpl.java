@@ -2,6 +2,7 @@ package com.hhaouari.roverscan.services.impl;
 
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
+import com.hhaouari.roverscan.entities.enums.Instruction;
 import com.hhaouari.roverscan.services.DirectionHelper;
 import com.hhaouari.roverscan.services.PositionHelper;
 import com.hhaouari.roverscan.services.RoverControlService;
@@ -21,19 +22,17 @@ public class RoverControlServiceImpl implements RoverControlService {
      */
     @Override
     public boolean move(Rover rover, Plateau plateau) {
-        String roverInstructions = rover.getInstructions();
+        Instruction[] roverInstructions = rover.getInstructions();
         if (roverInstructions == null) {
             return false;
         }
-        for (int i = 0; i < roverInstructions.length(); i++) {
-            char instruction = roverInstructions.charAt(i);
-            if (instruction == 'M') {
+        for (Instruction instruction: roverInstructions) {
+            if (instruction.equals(Instruction.M)) {
                 moveForward(rover, plateau);
             } else {
                 rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), instruction));
             }
         }
-        rover.setInstructions(null);
         return true;
     }
 
@@ -45,7 +44,7 @@ public class RoverControlServiceImpl implements RoverControlService {
      */
     @Override
     public boolean turnLeft(Rover rover) {
-        rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), 'L'));
+        rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), Instruction.L));
         return true;
     }
 
@@ -57,7 +56,7 @@ public class RoverControlServiceImpl implements RoverControlService {
      */
     @Override
     public boolean turnRight(Rover rover) {
-        rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), 'R'));
+        rover.setDirection(directionHelper.getNewDirection(rover.getDirection(), Instruction.R));
         return true;
     }
 

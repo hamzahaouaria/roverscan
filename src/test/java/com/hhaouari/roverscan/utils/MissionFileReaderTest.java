@@ -5,6 +5,7 @@ import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.entities.enums.Instruction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,29 @@ class MissionFileReaderTest {
 
     private CoordinateStringReader coordinateFileReader;
     private MissionFileReader missionFileReader;
+
+    private static final Instruction[] instructions1 = new Instruction[]{
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.L,
+            Instruction.M,
+            Instruction.M};
+
+    private static final Instruction[] instructions2 = new Instruction[]{
+            Instruction.M,
+            Instruction.M,
+            Instruction.R,
+            Instruction.M,
+            Instruction.M,
+            Instruction.R,
+            Instruction.M,
+            Instruction.R,
+            Instruction.R,
+            Instruction.M};
 
     @BeforeEach
     void setUp() {
@@ -43,7 +67,7 @@ class MissionFileReaderTest {
     @Test
     void testReadingRoverCoordinate() {
         Rover rover = coordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
-        Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
+        Rover expectedRover = new Rover(1, 2, Direction.N, instructions1);
         assertEquals(expectedRover, rover);
     }
 
@@ -54,8 +78,8 @@ class MissionFileReaderTest {
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(
-                new Rover(1, 2, Direction.N, "LMLMLMLMM"),
-                new Rover(3, 3, Direction.E, "MMRMMRMRRM")));
+                new Rover(1, 2, Direction.N, instructions1),
+                new Rover(3, 3, Direction.E, instructions2)));
 
         assertEquals(expectedMission, mission);
     }
