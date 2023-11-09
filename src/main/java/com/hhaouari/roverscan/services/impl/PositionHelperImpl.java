@@ -10,7 +10,7 @@ public class PositionHelperImpl implements PositionHelper {
         if (rover.getX() > 0) {
             rover.setX(rover.getX() - 1);
             return true;
-        }  else {
+        } else {
             return false;
         }
     }

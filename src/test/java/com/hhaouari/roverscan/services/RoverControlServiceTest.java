@@ -41,7 +41,7 @@ class RoverControlServiceTest {
         Rover rover = new Rover(1, 2, Direction.N, instruction);
         roverControlService.turnRight(rover);
         Rover expectedRover = new Rover(1, 2, Direction.E, instruction);
-        assertEquals(expectedRover,rover);
+        assertEquals(expectedRover, rover);
     }
 
     @Test
@@ -51,7 +51,7 @@ class RoverControlServiceTest {
         Plateau plateau = new Plateau(5, 5);
         roverControlService.move(rover, plateau);
         Rover expectedRover = new Rover(1, 3, Direction.N, null);
-        assertEquals(expectedRover,rover);
+        assertEquals(expectedRover, rover);
     }
 
     @Test
@@ -69,7 +69,7 @@ class RoverControlServiceTest {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         roverControlService.turnLeft(rover);
         Rover expectedRover = new Rover(1, 2, Direction.W, "LMLMLMLMM");
-        assertEquals(expectedRover,rover);
+        assertEquals(expectedRover, rover);
 
     }
 
@@ -78,7 +78,7 @@ class RoverControlServiceTest {
         Rover rover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         roverControlService.turnRight(rover);
         Rover expectedRover = new Rover(1, 2, Direction.E, "LMLMLMLMM");
-        assertEquals(expectedRover,rover);
+        assertEquals(expectedRover, rover);
 
     }
 
@@ -88,7 +88,7 @@ class RoverControlServiceTest {
         Plateau plateau = new Plateau(5, 5);
         roverControlService.moveForward(rover, plateau);
         Rover expectedRover = new Rover(1, 3, Direction.N, "LMLMLMLMM");
-        assertEquals(expectedRover,rover);
+        assertEquals(expectedRover, rover);
     }
 
     @Test
@@ -109,6 +109,5 @@ class RoverControlServiceTest {
         Rover expectedRover = new Rover(5, 1, Direction.E, null);
         assertEquals(rover, expectedRover);
     }
-
 
 }

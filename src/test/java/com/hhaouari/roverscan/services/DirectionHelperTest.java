@@ -34,43 +34,43 @@ class DirectionHelperTest {
     @Test
     void testGetNewDirectionNToR() {
         Direction direction = directionHelper.getNewDirection(Direction.N, 'R');
-        assertEquals(Direction.E,direction);
+        assertEquals(Direction.E, direction);
     }
 
     @Test
     void testGetNewDirectionSToL() {
         Direction direction = directionHelper.getNewDirection(Direction.S, 'L');
-        assertEquals(Direction.E,direction);
+        assertEquals(Direction.E, direction);
     }
 
     @Test
     void testGetNewDirectionSToR() {
         Direction direction = directionHelper.getNewDirection(Direction.S, 'R');
-        assertEquals(Direction.W,direction);
+        assertEquals(Direction.W, direction);
     }
 
     @Test
     void testGetNewDirectionEToL() {
         Direction direction = directionHelper.getNewDirection(Direction.E, 'L');
-        assertEquals(Direction.N,direction);
+        assertEquals(Direction.N, direction);
     }
 
     @Test
     void testGetNewDirectionEToR() {
         Direction direction = directionHelper.getNewDirection(Direction.E, 'R');
-        assertEquals(Direction.S,direction);
+        assertEquals(Direction.S, direction);
     }
 
     @Test
     void testGetNewDirectionWToL() {
         Direction direction = directionHelper.getNewDirection(Direction.W, 'L');
-        assertEquals(Direction.S,direction);
+        assertEquals(Direction.S, direction);
     }
 
     @Test
     void testGetNewDirectionWToR() {
         Direction direction = directionHelper.getNewDirection(Direction.W, 'R');
-        assertEquals(Direction.N,direction);
+        assertEquals(Direction.N, direction);
     }
 
     @Test

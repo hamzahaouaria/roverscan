@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class RoverPosition {
-    private int x;
-    private int y;
+    private long x;
+    private long y;
     private Direction direction;
 
 }

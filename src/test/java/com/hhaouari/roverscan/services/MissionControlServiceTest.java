@@ -77,7 +77,7 @@ class MissionControlServiceTest {
     }
 
     @Test
-    void testRunMissionRoversInstructionsOffPlateauLimit(){
+    void testRunMissionRoversInstructionsOffPlateauLimit() {
         Mission mission = new Mission();
         mission.setPlateau(new Plateau(5, 5));
         String outPlateauInstruction = "MMMMMMMMMMMMMMMMMM";
@@ -85,8 +85,7 @@ class MissionControlServiceTest {
                 new Rover(1, 1, Direction.N, outPlateauInstruction),
                 new Rover(1, 1, Direction.E, outPlateauInstruction),
                 new Rover(1, 1, Direction.S, outPlateauInstruction),
-                new Rover(1, 1, Direction.W, outPlateauInstruction)
-        ));
+                new Rover(1, 1, Direction.W, outPlateauInstruction)));
 
         missionControlService.runMissionRoversInstructions(mission);
         Mission expectedMission = new Mission();
@@ -95,12 +94,9 @@ class MissionControlServiceTest {
                 new Rover(1, 5, Direction.N, null),
                 new Rover(5, 1, Direction.E, null),
                 new Rover(1, 0, Direction.S, null),
-                new Rover(0, 1, Direction.W, null)
-        ));
+                new Rover(0, 1, Direction.W, null)));
         assertEquals(expectedMission, mission);
 
-
     }
-
 
 }

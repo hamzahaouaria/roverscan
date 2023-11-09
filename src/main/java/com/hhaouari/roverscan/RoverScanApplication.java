@@ -13,7 +13,8 @@ public class RoverScanApplication {
 		MissionControlService missionControlService = new MissionControlServiceImpl();
 		Mission mission = missionControlService.execute(fileInput);
 		System.out.println(mission);
-		// TODO: (Enable) Spring context is not needed for now, Enable it when using autowired beans
+		// TODO: (Enable) Spring context is not needed for now, Enable it when using
+		// autowired beans
 		// SpringApplication.run(RoverscanApplication.class, args);
 	}
 
