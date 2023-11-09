@@ -1,5 +1,6 @@
 package com.hhaouari.roverscan.services;
 
+import com.hhaouari.roverscan.constants.TestResources;
 import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
@@ -15,16 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class MissionControlServiceTest {
 
-    private static final String FILE_PATH = "src/test/resources/input-case-1.txt";
-
-    private static final String FILE_PATH_2 = "src/test/resources/input-case-2.txt";
-
-    private static final String FILE_PATH_3_PERFORMENCE = "src/test/resources/input-case-3.txt";
     private final MissionControlService missionControlService = new MissionControlServiceImpl();
 
     @Test
     void testMission() {
-        Mission mission = missionControlService.execute(FILE_PATH);
+        Mission mission = missionControlService.execute(TestResources.SAMPLE_TEST_CASE_BASIC);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(
@@ -36,7 +32,7 @@ class MissionControlServiceTest {
 
     @Test
     void testMission2() {
-        Mission mission = missionControlService.execute(FILE_PATH_2);
+        Mission mission = missionControlService.execute(TestResources.SAMPLE_TEST_CASE_CUSTOM);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(10, 10));
         expectedMission.setRovers(Arrays.asList(
