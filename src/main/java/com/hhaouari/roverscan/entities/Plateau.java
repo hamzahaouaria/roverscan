@@ -32,4 +32,9 @@ public class Plateau {
         return Objects.hash(getHeight(), getWidth());
     }
 
+    @Override
+    public String toString() {
+        return width + " " + height;
+    }
+
 }
