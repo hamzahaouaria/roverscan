@@ -3,9 +3,9 @@ package com.hhaouari.roverscan.services.impl;
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.entities.enums.Instruction;
 import com.hhaouari.roverscan.exceptions.DirectionInvalidInstructionException;
-import com.hhaouari.roverscan.services.DirectionHelper;
+import com.hhaouari.roverscan.services.DirectionCalculatorService;
 
-public class DirectionHelperImpl implements DirectionHelper {
+public class DirectionCalculatorServiceImpl implements DirectionCalculatorService {
 
     /**
      * @param currentDirection current direction

@@ -3,7 +3,7 @@ package com.hhaouari.roverscan.services;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 
-public interface PositionHelper {
+public interface PositionCalculatorService {
 
     /**
      * Move the rover forward to the west, if the rover is at the west border of the plateau, it will not move

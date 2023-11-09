@@ -3,7 +3,7 @@ package com.hhaouari.roverscan.services;
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.entities.enums.Instruction;
 
-public interface DirectionHelper {
+public interface DirectionCalculatorService {
 
     /**
      * @param currentDirection current direction
