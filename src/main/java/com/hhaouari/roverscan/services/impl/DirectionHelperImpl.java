@@ -15,7 +15,8 @@ public class DirectionHelperImpl implements DirectionHelper {
             case 'R' -> {
                 return getDirectionAfterRightTurn(currentDirection);
             }
-            default -> throw new DirectionInvalidInstructionException("Invalid direction instruction: " + newDirectionInstruction );
+            default -> throw new DirectionInvalidInstructionException(
+                    "Invalid direction instruction: " + newDirectionInstruction);
         }
     }
 

@@ -5,6 +5,8 @@ import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,9 +17,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MissionFileReaderTest {
 
+    private CoordinateStringReader coordinateFileReader;
+    private MissionFileReader missionFileReader;
+
+    @BeforeEach
+    void setUp() {
+        coordinateFileReader = new CoordinateStringReader();
+        missionFileReader = new MissionFileReader();
+    }
+
+    @AfterEach
+    void tearDown() {
+        coordinateFileReader = null;
+        missionFileReader = null;
+    }
+
     @Test
     void testReadingPlateauCoordinate() {
-        CoordinateStringReader coordinateFileReader = new CoordinateStringReader();
         Plateau plateau = coordinateFileReader.readPlateauCoordinate("5 5");
         Plateau expectedPlateau = new Plateau(5, 5);
 
@@ -26,7 +42,6 @@ class MissionFileReaderTest {
 
     @Test
     void testReadingRoverCoordinate() {
-        CoordinateStringReader coordinateFileReader = new CoordinateStringReader();
         Rover rover = coordinateFileReader.readRoverCoordinate("1 2 N", "LMLMLMLMM");
         Rover expectedRover = new Rover(1, 2, Direction.N, "LMLMLMLMM");
         assertEquals(expectedRover, rover);
@@ -34,9 +49,8 @@ class MissionFileReaderTest {
 
     @Test
     void testMission() {
-        MissionFileReader coordinateFileReader = new MissionFileReader();
-        Mission mission = coordinateFileReader.readMission(TestResources.SAMPLE_TEST_CASE_BASIC);
 
+        Mission mission = missionFileReader.readMission(TestResources.SAMPLE_TEST_CASE_BASIC);
         Mission expectedMission = new Mission();
         expectedMission.setPlateau(new Plateau(5, 5));
         expectedMission.setRovers(Arrays.asList(

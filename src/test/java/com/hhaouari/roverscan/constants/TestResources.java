@@ -8,6 +8,8 @@ public class TestResources {
     private static Map<String,String> testFilesMessages;
 
     public static final String SAMPLE_TEST_CASE_BASIC = "src/test/resources/input-case-1.txt";
+
+    public static final String SAMPLE_TEST_CASE_CUSTOM = "src/test/resources/input-case-2.txt";
     public static final String SRC_TEST_RESOURCES_NOEXIST_TXT = "src/test/resources/noexist.txt";
 
     public static final String NOT_VALID_PLATEAU_SIZE = "src/test/resources/input-case-not-valid-1.txt";

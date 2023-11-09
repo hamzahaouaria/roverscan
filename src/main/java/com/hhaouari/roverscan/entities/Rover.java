@@ -7,20 +7,28 @@ import java.util.Objects;
 
 @Data
 public class Rover {
-    private int x;
-    private int y;
+    private long x;
+    private long y;
     private Direction direction;
     private String instructions;
 
     public Rover() {
     }
 
-    public Rover(int x, int y, Direction direction, String instructions) {
+    public Rover(long x, long y, Direction direction, String instructions) {
         this.x = x;
         this.y = y;
         this.direction = direction;
         this.instructions = instructions;
     }
+
+    public Rover(long x, long y, String direction, String instructions) {
+        this.x = x;
+        this.y = y;
+        this.direction = Direction.valueOf(direction);
+        this.instructions = instructions;
+    }
+
 
     @Override
     public boolean equals(Object o) {

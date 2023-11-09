@@ -6,10 +6,10 @@ import java.util.Objects;
 
 @Data
 public class Plateau {
-    private int height;
-    private int width;
+    private long height;
+    private long width;
 
-    public Plateau(int width, int height) {
+    public Plateau(long width, long height) {
         this.width = width;
         this.height = height;
     }
@@ -30,6 +30,11 @@ public class Plateau {
     @Override
     public int hashCode() {
         return Objects.hash(getHeight(), getWidth());
+    }
+
+    @Override
+    public String toString() {
+        return width + " " + height;
     }
 
 }

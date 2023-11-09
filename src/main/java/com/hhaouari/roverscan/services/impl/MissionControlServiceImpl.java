@@ -24,8 +24,6 @@ public class MissionControlServiceImpl implements MissionControlService {
 
     @Override
     public void runMissionRoversInstructions(Mission mission) {
-        mission.getRovers().forEach(rover ->
-                roverControlService.move(rover, mission.getPlateau())
-        );
+        mission.getRovers().forEach(rover -> roverControlService.move(rover, mission.getPlateau()));
     }
 }

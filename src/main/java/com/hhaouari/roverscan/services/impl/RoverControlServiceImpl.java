@@ -14,6 +14,7 @@ public class RoverControlServiceImpl implements RoverControlService {
     /**
      * Move the rover according to the instructions and the plateau
      * Set the instructions to null after the move is done.
+     * 
      * @param rover
      * @param plateau
      * @return true if the move is done successfully
@@ -38,6 +39,7 @@ public class RoverControlServiceImpl implements RoverControlService {
 
     /**
      * Turn the rover to the left
+     * 
      * @param rover
      * @return true if the turn is done successfully
      */
@@ -49,6 +51,7 @@ public class RoverControlServiceImpl implements RoverControlService {
 
     /**
      * Turn the rover to the right
+     * 
      * @param rover
      * @return true if the turn is done successfully
      */
@@ -60,6 +63,7 @@ public class RoverControlServiceImpl implements RoverControlService {
 
     /**
      * Move the rover forward according to the plateau
+     * 
      * @param rover
      * @param plateau
      * @return true if the move is done successfully
