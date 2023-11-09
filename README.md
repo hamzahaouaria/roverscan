@@ -82,5 +82,5 @@ java -jar rover.jar input.txt
 - Are we going to handle colusion between diffrent revers?
 - How big is the input do we need to use BigIntegers?
 - currently not using Injection for services, do we need to consider adding tehm
-- Look is there is more sutable data structer for rovers
+- Look is there is more suitable data structure for rovers
 
