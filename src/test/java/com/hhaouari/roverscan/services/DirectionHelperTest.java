@@ -1,6 +1,7 @@
 package com.hhaouari.roverscan.services;
 
 import com.hhaouari.roverscan.entities.enums.Direction;
+import com.hhaouari.roverscan.exceptions.DirectionInvalidInstructionException;
 import com.hhaouari.roverscan.services.impl.DirectionHelperImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -73,8 +74,8 @@ class DirectionHelperTest {
     }
 
     @Test
-    void testGetNewDirectionNToM() {
-        assertThrows(RuntimeException.class, () -> {
+    void testGetNewDirectionNToMInvalid() {
+        assertThrows(DirectionInvalidInstructionException.class, () -> {
             directionHelper.getNewDirection(Direction.N, 'M');
         });
     }
