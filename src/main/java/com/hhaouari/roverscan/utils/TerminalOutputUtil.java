@@ -1,5 +1,6 @@
 package com.hhaouari.roverscan.utils;
 
+import com.hhaouari.roverscan.constants.UserErrorMessagesConstants;
 import com.hhaouari.roverscan.entities.Mission;
 import com.hhaouari.roverscan.services.MissionControlService;
 import com.hhaouari.roverscan.services.impl.MissionControlServiceImpl;
@@ -10,16 +11,18 @@ import java.nio.file.Paths;
 
 public class TerminalOutputUtil {
 
+    MissionControlService missionControlService = new MissionControlServiceImpl();
     public String finalTerminalOutput(String fileInput) {
-        MissionControlService missionControlService = new MissionControlServiceImpl();
         Mission mission = missionControlService.execute(fileInput);
         return mission.toString();
     }
 
     public String finalTerminalOutput(String[] args) {
         if (!validateArgs(args))
-            return "";
+            return UserErrorMessagesConstants.USAGE;
         String fileInput = args[0];
+        if (!missionControlService.validate(fileInput))
+            return String.format(UserErrorMessagesConstants.MISSION_FILE_DONT_HAVE_VALID_COORDINATE, fileInput);
         return finalTerminalOutput(fileInput).trim();
     }
 

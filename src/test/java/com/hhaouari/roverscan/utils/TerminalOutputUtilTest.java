@@ -1,6 +1,7 @@
 package com.hhaouari.roverscan.utils;
 
 import com.hhaouari.roverscan.constants.TestResources;
+import com.hhaouari.roverscan.constants.UserErrorMessagesConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ class TerminalOutputUtilTest {
     void testFinalTerminalOutputWithNoArgs() {
         String[] args = {};
         String output = terminalOutputUtil.finalTerminalOutput(args);
-        String expectedOutput = "";
+        String expectedOutput = UserErrorMessagesConstants.USAGE;
         assertEquals(expectedOutput, output);
     }
 
@@ -41,7 +42,7 @@ class TerminalOutputUtilTest {
     void testFinalTerminalOutputWithMoreThenOneArgs() {
         String[] args = { TestResources.SAMPLE_TEST_CASE_BASIC, TestResources.SAMPLE_TEST_CASE_CUSTOM };
         String output = terminalOutputUtil.finalTerminalOutput(args);
-        String expectedOutput = "";
+        String expectedOutput = UserErrorMessagesConstants.USAGE;
         assertEquals(expectedOutput, output);
     }
 
@@ -49,7 +50,7 @@ class TerminalOutputUtilTest {
     void testFinalTerminalOutputWithNotExistsArgs() {
         String[] args = { TestResources.SRC_TEST_RESOURCES_NOEXIST_TXT };
         String output = terminalOutputUtil.finalTerminalOutput(args);
-        String expectedOutput = "";
+        String expectedOutput = UserErrorMessagesConstants.USAGE;
         assertEquals(expectedOutput, output);
     }
 
@@ -81,4 +82,12 @@ class TerminalOutputUtilTest {
     boolean isValid = terminalOutputUtil.validateArgs(args);
     assertFalse(isValid);
   }
+
+    @Test
+    void testValidateMissionInstructionFormat(){
+        String[] args = { TestResources.NOT_VALID_PLATEAU_SIZE };
+        String output = terminalOutputUtil.finalTerminalOutput(args);
+        String expectedOutput = String.format(UserErrorMessagesConstants.MISSION_FILE_DONT_HAVE_VALID_COORDINATE, TestResources.NOT_VALID_PLATEAU_SIZE);
+        assertEquals(expectedOutput, output);
+    }
 }
