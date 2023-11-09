@@ -63,8 +63,8 @@ public class MissionFileReader {
              return false;
          } else {
              String[] positionCoordinates = position.split(" ");
-             int x = Integer.parseInt(positionCoordinates[0]);
-             int y = Integer.parseInt(positionCoordinates[1]);
+             long x = Long.parseLong(positionCoordinates[0]);
+             long y = Long.parseLong(positionCoordinates[1]);
              if(x > plateau.getWidth() || y > plateau.getHeight()) return false;
              return x >= 0 && y >= 0;
          }
@@ -74,8 +74,8 @@ public class MissionFileReader {
     private static boolean isPlateauInputValid(String plateauLine) {
         if(!plateauLine.matches("\\d+ \\d+")) return false;
         String[] plateauCoordinates = plateauLine.split(" ");
-        int width = Integer.parseInt(plateauCoordinates[0]);
-        int height = Integer.parseInt(plateauCoordinates[1]);
+        long width = Long.parseLong(plateauCoordinates[0]);
+        long height = Long.parseLong(plateauCoordinates[1]);
         return width >= 0 && height >= 0;
     }
 }

@@ -4,6 +4,8 @@ import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.services.impl.RoverControlServiceImpl;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -11,8 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class RoverControlServiceTest {
-    RoverControlService roverControlService = new RoverControlServiceImpl();
+    RoverControlService roverControlService;
 
+    @BeforeEach
+    void setUp() {
+        roverControlService = new RoverControlServiceImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        roverControlService = null;
+    }
 
     @Test
     void testCallLeftMethod() {

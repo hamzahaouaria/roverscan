@@ -2,6 +2,8 @@ package com.hhaouari.roverscan.services;
 
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.services.impl.DirectionHelperImpl;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,7 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class DirectionHelperTest {
-    DirectionHelper directionHelper = new DirectionHelperImpl();
+    DirectionHelper directionHelper;
+
+    @BeforeEach
+    void setUp() {
+        directionHelper = new DirectionHelperImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        directionHelper = null;
+    }
 
     @Test
     void testGetNewDirectionNToL() {

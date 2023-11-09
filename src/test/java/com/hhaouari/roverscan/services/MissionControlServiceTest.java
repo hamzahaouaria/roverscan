@@ -6,6 +6,8 @@ import com.hhaouari.roverscan.entities.Plateau;
 import com.hhaouari.roverscan.entities.Rover;
 import com.hhaouari.roverscan.entities.enums.Direction;
 import com.hhaouari.roverscan.services.impl.MissionControlServiceImpl;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -16,7 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class MissionControlServiceTest {
 
-    private final MissionControlService missionControlService = new MissionControlServiceImpl();
+    private MissionControlService missionControlService;
+
+    @BeforeEach
+    void setUp() {
+        missionControlService = new MissionControlServiceImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        missionControlService = null;
+    }
 
     @Test
     void testMission() {
